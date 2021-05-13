@@ -1,4 +1,4 @@
-//import axios from 'axios';
+import axios from 'axios';
 import React, { useContext, useEffect, useReducer } from 'react';
 import reducer from '../reducers/products_reducer';
 import { products_url as url } from '../utils/constants';
@@ -15,6 +15,10 @@ import {
 
 const initialState = {
 	isSidebarOpen: false,
+	products_loading: false,
+	products_error: false,
+	products: [],
+	featured_products: [],
 };
 
 const ProductsContext = React.createContext();
@@ -33,6 +37,23 @@ export const ProductsProvider = ({ children }) => {
 	const closeSidebar = () => {
 		dispatch({ type: SIDEBAR_CLOSE });
 	};
+
+	//fetching products from API. Setting up useEffect in context, because I can fetch it once and can distribute it to home page and products page.
+	const fetchProducts = async url => {
+		//this dispatch will set up the loading in products reducer. Handles loading, sucess and error.
+		dispatch({ type: GET_PRODUCTS_BEGIN });
+		try {
+			const response = await axios.get(url);
+			const products = response.data;
+			dispatch({ type: GET_PRODUCTS_SUCCESS, payload: products });
+		} catch (error) {
+			dispatch({ type: GET_PRODUCTS_ERROR });
+		}
+	};
+
+	useEffect(() => {
+		fetchProducts(url);
+	}, []);
 
 	return (
 		<ProductsContext.Provider value={{ ...state, openSidebar, closeSidebar }}>

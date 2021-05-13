@@ -4,7 +4,29 @@ import { PageHero } from '../components';
 import aboutImg from '../assets/hero-bcg.jpeg';
 
 const AboutPage = () => {
-	return <h4>about page</h4>;
+	return (
+		<main>
+			<PageHero title='about' />
+
+			<Wrapper className='page section section-center'>
+				<img src={aboutImg} alt='nice table and chair' />
+				<article>
+					<div className='title'>
+						<h2>Our Story</h2>
+						<div className='underline'></div>
+						<p>
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim
+							accusantium animi vitae at commodi veniam dolore voluptatum ut
+							excepturi omnis? Natus necessitatibus libero labore, quam eos
+							laboriosam vel minus et aspernatur iure debitis ducimus dolor
+							iusto ipsum aliquid expedita animi quaerat! Cumque soluta
+							necessitatibus, asperiores ea magnam veritatis distinctio atque.
+						</p>
+					</div>
+				</article>
+			</Wrapper>
+		</main>
+	);
 };
 
 const Wrapper = styled.section`
