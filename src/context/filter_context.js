@@ -12,13 +12,26 @@ import {
 } from '../actions';
 import { useProductsContext } from './products_context';
 
-const initialState = {};
+const initialState = {
+	filtered_products: [],
+	all_products: [],
+	grid_view: true,
+};
 
 const FilterContext = React.createContext();
 
+//information from products context cannot be passed to filter reducer/state directly, need to do it through the FilterProvider component. We'll want to use useEffect: when component mounts, dispatch load product action.
+
 export const FilterProvider = ({ children }) => {
+	const { products } = useProductsContext();
+	const [state, dispatch] = useReducer(reducer, initialState);
+	//this is where we're sending the product information to filter reducer, every time component loads or products array changes(initially it's empty)
+	useEffect(() => {
+		dispatch({ type: LOAD_PRODUCTS, payload: products });
+	}, [products]);
+
 	return (
-		<FilterContext.Provider value='filter context'>
+		<FilterContext.Provider value={{ ...state }}>
 			{children}
 		</FilterContext.Provider>
 	);

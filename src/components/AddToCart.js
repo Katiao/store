@@ -1,12 +1,71 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-//import { FaCheck } from 'react-icons/fa';
+import { FaCheck } from 'react-icons/fa';
 import { useCartContext } from '../context/cart_context';
 import AmountButtons from './AmountButtons';
 
-const AddToCart = () => {
-	return <h4>addToCart </h4>;
+const AddToCart = ({ product }) => {
+	const { id, stock, colors } = product;
+	//state for color buttons:
+	const [mainColor, setMainColor] = useState(colors[0]);
+	//state for amount buttons:
+	const [amount, setAmount] = useState(1);
+
+	//in below function user cannot increase amount more than stock amount or less than 1
+	const increase = () => {
+		setAmount(oldAmount => {
+			let tempAmount = oldAmount + 1;
+			if (tempAmount > stock) {
+				tempAmount = stock;
+			}
+			return tempAmount;
+		});
+	};
+
+	const decrease = () => {
+		setAmount(oldAmount => {
+			let tempAmount = oldAmount - 1;
+			if (tempAmount < 1) {
+				tempAmount = 1;
+			}
+			return tempAmount;
+		});
+	};
+
+	return (
+		<Wrapper>
+			<div className='colors'>
+				<span> colors: </span>
+				<div>
+					{/* for each color return a button, background color added dynamically, if the color is the same as the main color, it gets the class of active (half opacity in css) and gets a checkmark  */}
+					{colors.map((color, index) => {
+						return (
+							<button
+								key={index}
+								style={{ background: color }}
+								className={`${
+									mainColor === color ? 'color-btn active' : 'color-btn'
+								}`}
+								onClick={() => setMainColor(color)}>
+								{mainColor === color ? <FaCheck /> : null}
+							</button>
+						);
+					})}
+				</div>
+			</div>
+			<div className='btn-container'>
+				<AmountButtons
+					amount={amount}
+					increase={increase}
+					decrease={decrease}
+				/>
+				<Link to='/cart' className='btn'>
+					add to cart
+				</Link>
+			</div>
+		</Wrapper>
+	);
 };
 
 const Wrapper = styled.section`

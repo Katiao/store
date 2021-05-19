@@ -8,9 +8,13 @@ import { CartProvider } from './context/cart_context';
 import { UserProvider } from './context/user_context';
 //import { Auth0Provider } from '@auth0/auth0-react';
 
+//filter provider inside products provider to ensure that filter provider has access to data coming from products provider.
+
 ReactDOM.render(
 	<ProductsProvider>
-		<App />
+		<FilterProvider>
+			<App />
+		</FilterProvider>
 	</ProductsProvider>,
 
 	document.getElementById('root')
