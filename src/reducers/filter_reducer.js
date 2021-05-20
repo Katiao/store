@@ -14,10 +14,14 @@ import {
 
 const filter_reducer = (state, action) => {
 	if (action.type === LOAD_PRODUCTS) {
+		//mapping through each product in payload and get all prices. Cannot pass array in max method so use spread operator
+		let maxPrice = action.payload.map((p) => p.price);
+		maxPrice = Math.max(...maxPrice);
 		return {
 			...state,
 			all_products: [...action.payload],
 			filtered_products: [...action.payload],
+			filters: { ...state.filters, max_price: maxPrice, price: maxPrice },
 		};
 	}
 
@@ -54,6 +58,15 @@ const filter_reducer = (state, action) => {
 			});
 		}
 		return { ...state, filtered_products: tempProducts };
+	}
+	if (action.type === UPDATE_FILTERS) {
+		//passing in payload as an object so need to distructure them here.
+		const { name, value } = action.payload;
+		// since filters is an object, I'm saying, whatever name value I'm passing in access that property and set it to this value dynamically:
+		return { ...state, filters: { ...state.filters, [name]: value } };
+	}
+	if (action.type === FILTER_PRODUCTS) {
+		return { ...state };
 	}
 
 	throw new Error(`No Matching "${action.type}" - action type`);
