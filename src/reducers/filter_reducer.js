@@ -66,7 +66,56 @@ const filter_reducer = (state, action) => {
 		return { ...state, filters: { ...state.filters, [name]: value } };
 	}
 	if (action.type === FILTER_PRODUCTS) {
-		return { ...state };
+		const { all_products } = state;
+		const { text, category, company, color, price, shipping } = state.filters;
+		//before I filter anything I always start with a fresh copy of all the products. Always need access to default data, so that for eg. if there is no text it falls back to showing all default products.
+		let tempProducts = [...all_products];
+		//filtering text
+		if (text) {
+			tempProducts = tempProducts.filter((product) => {
+				return product.name.toLowerCase().startsWith(text);
+			});
+		}
+		//filtering category
+		if (category !== 'all') {
+			tempProducts = tempProducts.filter(
+				//for that product, check if product's category matches state category.
+				(product) => product.category === category
+			);
+		}
+
+		//filtering company
+		if (company !== 'all') {
+			tempProducts = tempProducts.filter(
+				//for that product, check if product's company matches state company.
+				(product) => product.company === company
+			);
+		}
+
+		//filtering colors
+		//gotcha with colors as it's an array.
+		if (color !== 'all') {
+			tempProducts = tempProducts.filter((product) => {
+				//product is an array and product.color is also an array
+				//I run find method on colors array, check if color matches color coming from the state.
+				return product.colors.find((c) => c === color);
+			});
+		}
+
+		//filtering price
+		//if product price property is less or equal to price coming from my state, then return those products.
+		tempProducts = tempProducts.filter((product) => product.price <= price);
+
+		//filtering shipping
+		// if shipping (state) is true, return the products that have the shipping property to true.
+		if (shipping) {
+			tempProducts = tempProducts.filter(
+				(product) => product.shipping === true
+			);
+		}
+
+		//returning state after all filters above are done. Returning all products if conditions above are not met.
+		return { ...state, filtered_products: tempProducts };
 	}
 	if (action.type === CLEAR_FILTERS) {
 		return {
