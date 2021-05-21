@@ -65,7 +65,98 @@ const Filters = () => {
 						</div>
 					</div>
 					{/* end of categories */}
+
+					{/* companies */}
+					<div className='form-control'>
+						<h5>company</h5>
+						{/* important that name matches filter state value as it's important for dynamically setting up update filters*/}
+						<select
+							name='company'
+							value={company}
+							onChange={updateFilters}
+							className='company'>
+							{companies.map((c, index) => {
+								return (
+									<option key={index} value={c}>
+										{c}
+									</option>
+								);
+							})}
+						</select>
+					</div>
+					{/* end of companies */}
+					{/* colors */}
+					<div className='form-control'>
+						<h5>colors</h5>
+						<div className='colors'>
+							{colors.map((c, index) => {
+								if (c === 'all') {
+									return (
+										<button
+											key={index}
+											name='color'
+											onClick={updateFilters}
+											data-color='all'
+											className={`${
+												color === 'all' ? 'all-btn active' : 'all-btn'
+											}`}>
+											all
+										</button>
+									);
+								}
+								return (
+									<button
+										key={index}
+										name='color'
+										//dynamically overrides default background color:
+										style={{ background: c }}
+										/* if color (state value) matches the individual color, set style as active*/
+										className={`${
+											color === c ? 'color-btn active' : 'color-btn'
+										}`}
+										//add hex value to data (filter-context). With buttons we cannot use values so we use data attributes, which comes with html:
+										data-color={c}
+										onClick={updateFilters}>
+										{color === c ? <FaCheck /> : null}
+									</button>
+								);
+							})}
+						</div>
+					</div>
+					{/* end of colors */}
+					{/* price */}
+					<div className='form-control'>
+						<h5>price</h5>
+						<p className='price'>{formatPrice(price)}</p>
+						<input
+							type='range'
+							name='price'
+							onChange={updateFilters}
+							min={min_price}
+							max={max_price}
+							value={price}
+						/>
+					</div>
+					{/* end of price */}
+					{/* shipping */}
+
+					<div className='form-control shipping'>
+						<label htmlFor='shipping'>free shipping</label>
+						<input
+							type='checkbox'
+							name='shipping'
+							id='shipping'
+							onChange={updateFilters}
+							//if state value false, value is unchecked and if true it's checked. This is used instead of value.
+							checked={shipping}
+						/>
+					</div>
+
+					{/* end of shipping */}
 				</form>
+				<button type='button' className='clear-btn' onClick={clearFilters}>
+					clear filters
+				</button>
 			</div>
 		</Wrapper>
 	);

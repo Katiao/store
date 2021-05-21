@@ -67,10 +67,25 @@ export const FilterProvider = ({ children }) => {
 		if (name === 'category') {
 			value = e.target.textContent;
 		}
+		//we also can't access value of hex colors using target.value therefore we use target.dataset:
+		if (name === 'color') {
+			value = e.target.dataset.color;
+		}
+		//when getting value from range input it turns into a string so need to turn it into number:
+		if (name == 'price') {
+			value = Number(value);
+		}
+		//for checkbox we're looking whether it is checked or not. Either true or false.
+		if (name === 'shipping') {
+			value = e.target.checked;
+		}
+
 		dispatch({ type: UPDATE_FILTERS, payload: { name, value } });
 	};
 
-	const clearFilters = () => {};
+	const clearFilters = () => {
+		dispatch({ type: CLEAR_FILTERS });
+	};
 
 	return (
 		<FilterContext.Provider
