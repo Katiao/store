@@ -13,7 +13,9 @@ import { UserProvider } from './context/user_context';
 ReactDOM.render(
 	<ProductsProvider>
 		<FilterProvider>
-			<App />
+			<CartProvider>
+				<App />
+			</CartProvider>
 		</FilterProvider>
 	</ProductsProvider>,
 

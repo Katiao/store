@@ -6,6 +6,7 @@ import { useCartContext } from '../context/cart_context';
 import AmountButtons from './AmountButtons';
 
 const AddToCart = ({ product }) => {
+	const { addToCart } = useCartContext();
 	const { id, stock, colors } = product;
 	//state for color buttons:
 	const [mainColor, setMainColor] = useState(colors[0]);
@@ -14,7 +15,7 @@ const AddToCart = ({ product }) => {
 
 	//in below function user cannot increase amount more than stock amount or less than 1
 	const increase = () => {
-		setAmount(oldAmount => {
+		setAmount((oldAmount) => {
 			let tempAmount = oldAmount + 1;
 			if (tempAmount > stock) {
 				tempAmount = stock;
@@ -24,7 +25,7 @@ const AddToCart = ({ product }) => {
 	};
 
 	const decrease = () => {
-		setAmount(oldAmount => {
+		setAmount((oldAmount) => {
 			let tempAmount = oldAmount - 1;
 			if (tempAmount < 1) {
 				tempAmount = 1;
@@ -60,7 +61,10 @@ const AddToCart = ({ product }) => {
 					increase={increase}
 					decrease={decrease}
 				/>
-				<Link to='/cart' className='btn'>
+				<Link
+					to='/cart'
+					className='btn'
+					onClick={() => addToCart(id, mainColor, amount, product)}>
 					add to cart
 				</Link>
 			</div>
