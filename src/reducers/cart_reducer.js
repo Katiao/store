@@ -43,6 +43,65 @@ const cart_reducer = (state, action) => {
 		}
 	}
 
+	if (action.type === REMOVE_CART_ITEM) {
+		//for each item in state, if item id doesnt match payload (where id is sitting), then return it.
+		const tempCart = state.cart.filter((item) => item.id !== action.payload);
+		return { ...state, cart: tempCart };
+	}
+
+	//clear cart : return empty array.
+	if (action.type === CLEAR_CART) {
+		return { ...state, cart: [] };
+	}
+	//toggle item amounts
+	if (action.type === TOGGLE_CART_ITEM_AMOUNT) {
+		const { id, value } = action.payload;
+		const tempCart = state.cart.map((item) => {
+			//id is already id + color
+			if (item.id === id) {
+				if (value === 'inc') {
+					let newAmount = item.amount + 1;
+					if (newAmount > item.max) {
+						newAmount = item.max;
+					}
+					return { ...item, amount: newAmount };
+				}
+				if (value === 'dec') {
+					let newAmount = item.amount - 1;
+					if (newAmount < 1) {
+						newAmount = 1;
+					}
+					return { ...item, amount: newAmount };
+				}
+			} else return item;
+		});
+
+		return { ...state, cart: tempCart };
+	}
+	//reduce function reduces our array to a single value, can be anything, even object.
+	//1st parameter - total of all calculations, 2nd parameter - current iteration / value
+	if (action.type === COUNT_CART_TOTALS) {
+		const { total_items, total_amount } = state.cart.reduce(
+			(total, cartItem) => {
+				const { amount, price } = cartItem;
+				//count items
+				total.total_items += amount;
+				// count sum
+				total.total_amount += price * amount;
+
+				//always return total(name of 1st parameter) otherwise functionality will break
+				//total will be an object
+				return total;
+			},
+			//reduce function: here you provide initial/default value:
+			{
+				total_items: 0,
+				total_amount: 0,
+			}
+		);
+		return { ...state, total_items, total_amount };
+	}
+
 	throw new Error(`No Matching "${action.type}" - action type`);
 };
 
