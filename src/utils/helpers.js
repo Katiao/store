@@ -10,7 +10,7 @@ export const getUniqueValues = (data, type) => {
 	//goal is to only get unique values.
 	let unique = data.map((item) => item[type]);
 	//colors are arrays of arrays so we need to flatten them so that we just get that array.
-	if (type == 'colors') {
+	if (type === 'colors') {
 		unique = unique.flat();
 	}
 	//return a new array starting with 'all', spread out new set, data type that only gives me unique values

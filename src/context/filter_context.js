@@ -72,7 +72,7 @@ export const FilterProvider = ({ children }) => {
 			value = e.target.dataset.color;
 		}
 		//when getting value from range input it turns into a string so need to turn it into number:
-		if (name == 'price') {
+		if (name === 'price') {
 			value = Number(value);
 		}
 		//for checkbox we're looking whether it is checked or not. Either true or false.

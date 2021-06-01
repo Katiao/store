@@ -12,7 +12,6 @@ import {
 	GET_SINGLE_PRODUCT_SUCCESS,
 	GET_SINGLE_PRODUCT_ERROR,
 } from '../actions';
-import { FaLessThanEqual } from 'react-icons/fa';
 
 const initialState = {
 	isSidebarOpen: false,
@@ -43,7 +42,7 @@ export const ProductsProvider = ({ children }) => {
 	};
 
 	//fetching products from API. Setting up useEffect in context, because I can fetch it once and can distribute it to home page and products page.
-	const fetchProducts = async url => {
+	const fetchProducts = async (url) => {
 		//this dispatch will set up the loading in products reducer. Handles loading, sucess and error.
 		dispatch({ type: GET_PRODUCTS_BEGIN });
 		try {
@@ -55,7 +54,7 @@ export const ProductsProvider = ({ children }) => {
 		}
 	};
 
-	const fetchSingleProduct = async url => {
+	const fetchSingleProduct = async (url) => {
 		dispatch({ type: GET_SINGLE_PRODUCT_BEGIN });
 		try {
 			const response = await axios.get(url);

@@ -33,10 +33,13 @@ const FeaturedProducts = () => {
 			</div>
 			{/* use slice here because we only want to display three products from the 6 featured products */}
 			<div className='section-center featured'>
-				{featured.slice(0, 3).map(product => {
+				{featured.slice(0, 3).map((product) => {
 					return <Product key={product.id} {...product} />;
 				})}
 			</div>
+			<Link to='/products' className='btn'>
+				all products
+			</Link>
 		</Wrapper>
 	);
 };

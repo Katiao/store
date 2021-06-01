@@ -28,6 +28,7 @@ const SingleProductPage = () => {
 
 	useEffect(() => {
 		fetchSingleProduct(`${url}${id}`);
+		//eslint-disable-next-line
 	}, [id]);
 	//set up automatic navigation back to home page if there is an error in 3 secs:
 	//we can navigate away from page using useHistory hook
@@ -37,6 +38,7 @@ const SingleProductPage = () => {
 				history.push(`/`);
 			}, 3000);
 		}
+		//eslint-disable-next-line
 	}, [error]);
 	if (loading) {
 		return <Loading />;

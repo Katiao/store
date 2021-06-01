@@ -10,6 +10,7 @@ import { useUserContext } from '../context/user_context';
 
 const Nav = () => {
 	const { openSidebar } = useProductsContext();
+	const { myUser } = useUserContext();
 	return (
 		<NavContainer>
 			<div className='nav-center'>
@@ -22,7 +23,7 @@ const Nav = () => {
 					</button>
 				</div>
 				<ul className='nav-links'>
-					{links.map(link => {
+					{links.map((link) => {
 						const { id, text, url } = link;
 						return (
 							<li key={id}>
@@ -30,6 +31,12 @@ const Nav = () => {
 							</li>
 						);
 					})}
+					{/* display checkout link only if user exists/ is signed in*/}
+					{myUser && (
+						<li>
+							<Link to='/checkout'>checkout</Link>
+						</li>
+					)}
 				</ul>
 				<CartButtons />
 			</div>

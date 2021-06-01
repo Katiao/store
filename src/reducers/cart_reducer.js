@@ -73,7 +73,9 @@ const cart_reducer = (state, action) => {
 					}
 					return { ...item, amount: newAmount };
 				}
-			} else return item;
+			}
+			//if item doesn't match, return item as it is:
+			return item;
 		});
 
 		return { ...state, cart: tempCart };
