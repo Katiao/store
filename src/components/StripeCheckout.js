@@ -46,9 +46,19 @@ const CheckoutForm = () => {
 			},
 		},
 	};
-
+	//when component mounts, use axios to post my data (what is in cart, total, shipping fee etc. post that to function, which communicates with Stripe)
 	const createPaymentIntent = async () => {
-		console.log('hello from Stripe checkout');
+		try {
+			// we are sending something to server (serverless Netlify function)
+			const data = await axios.post(
+				'/.netlify/functions/create-payment-intent',
+				JSON.stringify({ cart, shipping_fee, total_amount })
+			);
+			console.log(data.data.clientSecret);
+			setClientSecret(data.data.clientSecret);
+		} catch (error) {
+			console.log(error.response);
+		}
 	};
 
 	useEffect(() => {
