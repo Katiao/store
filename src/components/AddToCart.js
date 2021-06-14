@@ -7,9 +7,9 @@ import AmountButtons from './AmountButtons';
 
 const AddToCart = ({ product }) => {
 	const { addToCart } = useCartContext();
-	const { id, stock, colors } = product;
+	const { id, stock } = product;
 	//state for color buttons:
-	const [mainColor, setMainColor] = useState(colors[0]);
+	//const [mainColor, setMainColor] = useState(colors[0]);
 	//state for amount buttons:
 	const [amount, setAmount] = useState(1);
 
@@ -40,7 +40,7 @@ const AddToCart = ({ product }) => {
 				<span> colors: </span>
 				<div>
 					{/* for each color return a button, background color added dynamically, if the color is the same as the main color, it gets the class of active (half opacity in css) and gets a checkmark  */}
-					{colors.map((color, index) => {
+					{/* {colors.map((color, index) => {
 						return (
 							<button
 								key={index}
@@ -52,7 +52,7 @@ const AddToCart = ({ product }) => {
 								{mainColor === color ? <FaCheck /> : null}
 							</button>
 						);
-					})}
+					})} */}
 				</div>
 			</div>
 			<div className='btn-container'>
@@ -64,7 +64,7 @@ const AddToCart = ({ product }) => {
 				<Link
 					to='/cart'
 					className='btn'
-					onClick={() => addToCart(id, mainColor, amount, product)}>
+					onClick={() => addToCart(id, amount, product)}>
 					add to cart
 				</Link>
 			</div>

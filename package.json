@@ -4,22 +4,24 @@
 	"private": true,
 	"dependencies": {
 		"@auth0/auth0-react": "^1.5.0",
-		"@stripe/react-stripe-js": "^1.1.2",
-		"@stripe/stripe-js": "^1.11.0",
-		"@testing-library/jest-dom": "^5.12.0",
-		"@testing-library/react": "^11.2.6",
+		"@stripe/react-stripe-js": "^1.4.1",
+		"@stripe/stripe-js": "^1.15.0",
+		"@testing-library/jest-dom": "^5.14.1",
+		"@testing-library/react": "^11.2.7",
 		"@testing-library/user-event": "^12.8.3",
 		"axios": "^0.21.1",
-		"dotenv": "^8.2.0",
-		"netlify": "^6.0.12",
+		"dotenv": "^8.6.0",
+		"netlify": "^6.1.29",
+		"normalize-url": "^6.0.1",
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2",
 		"react-icons": "^4.2.0",
 		"react-router-dom": "^5.2.0",
 		"react-scripts": "4.0.3",
-		"stripe": "^8.130.0",
+		"stripe": "^8.154.0",
 		"styled-components": "^5.3.0",
-		"web-vitals": "^1.1.2"
+		"web-vitals": "^1.1.2",
+		"airtable-node": "^0.1.20"
 	},
 	"scripts": {
 		"start": "react-scripts start",
@@ -27,7 +29,8 @@
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
 		"netlify": "netlify dev",
-		"dev": "netlify dev"
+		"dev": "netlify dev",
+		"preinstall": "npx npm-force-resolutions"
 	},
 	"eslintConfig": {
 		"extends": [
@@ -48,6 +51,11 @@
 		]
 	},
 	"devDependencies": {
-		"netlify-cli": "^3.32.6"
+		"netlify-cli": "^3.37.16"
+	},
+	"resolutions": {
+		"normalize-url": "^6.0.1",
+		"css-what": "^5.0.1",
+		"glob-parent": "^6.0.0"
 	}
 }

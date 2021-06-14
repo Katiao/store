@@ -1,3 +1,27 @@
+Netlify TOML for create-react-app
+
+[build]
+
+    command = 'npm run build'
+    publish = '/build'
+    functions = './functions'
+
+[[redirects]]
+
+    from = '/api/*'
+    to = '/.netlify/functions/:splat'
+    status = 200
+
+[[redirects]]
+
+    from = '/*'
+    to = '/index.html'
+    status = 200
+
+build Command
+
+"build": "CI= react-scripts build"
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -68,3 +92,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
