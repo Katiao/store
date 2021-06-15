@@ -8,8 +8,8 @@ const Services = () => {
 			<div className='section-center'>
 				<article className='header'>
 					<h3>
-						custom furniture <br />
-						built only for you
+						Sustainable, fair <br />
+						organic materials
 					</h3>
 					<p>
 						Lorem ipsum dolor, sit amet consectetur adipisicing elit.
