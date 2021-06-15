@@ -24,7 +24,7 @@ const Filters = () => {
 	const categories = getUniqueValues(all_products, 'category');
 	const brands = getUniqueValues(all_products, 'brand');
 	//const sizes = getUniqueValues(all_products, 'sizes');
-	const sizes = ['all','XS', 'S', 'M', 'L', 'XL']
+	const sizes = ['all','XS', 'S', 'M', 'L', 'XL', 'One Size']
 
 	return (
 		<Wrapper>

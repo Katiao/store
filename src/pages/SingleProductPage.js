@@ -57,7 +57,7 @@ const SingleProductPage = () => {
 		brand,
 		images,
 	} = product.fields
-	console.log(product)
+	//console.log(product)
 	return (
 		<Wrapper>
 			<PageHero title={name} product />

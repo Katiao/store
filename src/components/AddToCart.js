@@ -7,9 +7,10 @@ import AmountButtons from './AmountButtons';
 
 const AddToCart = ({ product }) => {
 	const { addToCart } = useCartContext();
-	const { id, stock } = product;
+	const { id } = product;
+	const { stock, sizes } = product.fields;
+	console.log(product)
 	//state for sizes buttons:
-	const sizes = ['XS', 'S', 'M', 'L', 'XL']
 	const [mainSize, setMainSize] = useState(sizes[0]);
 	//state for amount buttons:
 	const [amount, setAmount] = useState(1);
@@ -90,8 +91,8 @@ const Wrapper = styled.section`
 	}
 	.color-btn {
 		display: inline-block;
-		width: 1.8rem;
-		height: 1.8rem;
+		width: 2.5rem;
+		height: 2.5rem;
 		border-radius: 50%;
 		background: #222;
 		color: white;
