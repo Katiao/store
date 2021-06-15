@@ -36,11 +36,11 @@ exports.handler = async (event, context, cb) => {
         const products = records.map((product)=> {
             const { id } = product;
             const { name, images, price, sizes, brand, description, category, featured, shipping } = product.fields;
-            const image1 = images[0].url
-            const image2 = images[1].url
-            const image3 = images[2].url
-            const image4 = images[3].url
-            return { id, name, image1, image2, image3, image4, price, sizes, brand, description, category, featured, shipping}
+            // const image1 = images[0].url
+            // const image2 = images[1].url
+            // const image3 = images[2].url
+            // const image4 = images[3].url
+            return { id, name, images, price, sizes, brand, description, category, featured, shipping}
         })
         return {
             statusCode:200,

@@ -47,6 +47,7 @@ const SingleProductPage = () => {
 		return <Error />;
 	}
 	const {id: sku } = product
+	const { fields } = product
 	const {
 		name,
 		price,
@@ -56,8 +57,8 @@ const SingleProductPage = () => {
 		reviews,
 		brand,
 		images,
-	} = product.fields
-	//console.log(product)
+	} = fields
+	 //console.log(product.fields.brand)
 	return (
 		<Wrapper>
 			<PageHero title={name} product />
