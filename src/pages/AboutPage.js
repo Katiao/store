@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { PageHero } from '../components';
-import aboutImg from '../assets/hero-bcg.jpeg';
+import aboutImg from '../assets/hero-bcg.jpg';
 
 const AboutPage = () => {
 	return (
@@ -9,7 +9,7 @@ const AboutPage = () => {
 			<PageHero title='about' />
 
 			<Wrapper className='page section section-center'>
-				<img src={aboutImg} alt='nice table and chair' />
+				<img src={aboutImg} alt='two people walking and laughing' />
 				<article>
 					<div className='title'>
 						<h2>Our Story</h2>
@@ -22,6 +22,23 @@ const AboutPage = () => {
 							iusto ipsum aliquid expedita animi quaerat! Cumque soluta
 							necessitatibus, asperiores ea magnam veritatis distinctio atque.
 						</p>
+						<p>
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim
+							accusantium animi vitae at commodi veniam dolore voluptatum ut
+							excepturi omnis? Natus necessitatibus libero labore, quam eos
+							laboriosam vel minus et aspernatur iure debitis ducimus dolor
+							iusto ipsum aliquid expedita animi quaerat! Cumque soluta
+							necessitatibus, asperiores ea magnam veritatis distinctio atque.
+						</p>
+						<p>
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim
+							accusantium animi vitae at commodi veniam dolore voluptatum ut
+							excepturi omnis? Natus necessitatibus libero labore, quam eos
+							laboriosam vel minus et aspernatur iure debitis ducimus dolor
+							iusto ipsum aliquid expedita animi quaerat! Cumque soluta
+							necessitatibus, asperiores ea magnam veritatis distinctio atque.
+						</p>
+						
 					</div>
 				</article>
 			</Wrapper>
@@ -36,7 +53,7 @@ const Wrapper = styled.section`
 		width: 100%;
 		display: block;
 		border-radius: var(--radius);
-		height: 500px;
+		height: 800px;
 		object-fit: cover;
 	}
 	p {

@@ -67,7 +67,7 @@ const filter_reducer = (state, action) => {
 	}
 	if (action.type === FILTER_PRODUCTS) {
 		const { all_products } = state;
-		const { text, category, company, color, price, shipping } = state.filters;
+		const { text, category, brand, size, price, shipping } = state.filters;
 		//before I filter anything I always start with a fresh copy of all the products. Always need access to default data, so that for eg. if there is no text it falls back to showing all default products.
 		let tempProducts = [...all_products];
 		//filtering text
@@ -85,20 +85,20 @@ const filter_reducer = (state, action) => {
 		}
 
 		//filtering company
-		if (company !== 'all') {
+		if (brand !== 'all') {
 			tempProducts = tempProducts.filter(
 				//for that product, check if product's company matches state company.
-				(product) => product.company === company
+				(product) => product.brand === brand
 			);
 		}
 
 		//filtering colors
 		//gotcha with colors as it's an array.
-		if (color !== 'all') {
+		if (size !== 'all') {
 			tempProducts = tempProducts.filter((product) => {
 				//product is an array and product.color is also an array
 				//I run find method on colors array, check if color matches color coming from the state.
-				return product.colors.find((c) => c === color);
+				return product.sizes.find((s) => s === size);
 			});
 		}
 
@@ -124,9 +124,9 @@ const filter_reducer = (state, action) => {
 				//we're copying the values and overriding some of them. we want the price to stay the same when we clear filters.
 				...state.filters,
 				text: '',
-				company: 'all',
+				brand: 'all',
 				category: 'all',
-				color: 'all',
+				size: 'all',
 				price: state.filters.max_price,
 				shipping: false,
 			},

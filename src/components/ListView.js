@@ -6,10 +6,10 @@ const ListView = ({ products }) => {
 	return (
 		<Wrapper>
 			{products.map(product => {
-				const { id, image, name, price, description } = product;
+				const { id, image1, name, price, description } = product;
 				return (
 					<article key={id}>
-						<img src={image} alt={name} />
+						<img src={image1} alt={name} />
 						<div>
 							<h4>{name}</h4>
 							<h5 className='price'>{formatPrice(price)}</h5>
@@ -32,8 +32,8 @@ const Wrapper = styled.section`
 	img {
 		width: 100%;
 		display: block;
-		width: 300px;
-		height: 200px;
+		width: 250px;
+		height: 350px;
 		object-fit: cover;
 		border-radius: var(--radius);
 		margin-bottom: 1rem;

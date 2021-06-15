@@ -2,17 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 import { useFilterContext } from '../context/filter_context';
 import { getUniqueValues, formatPrice } from '../utils/helpers';
-import { FaCheck } from 'react-icons/fa';
+//import { FaCheck } from 'react-icons/fa';
 
 const Filters = () => {
 	const {
 		filters: {
 			text,
 			category,
-			company,
-			color,
-			min_price,
+			brand,
 			price,
+			min_price,
+			size,
 			max_price,
 			shipping,
 		},
@@ -22,8 +22,9 @@ const Filters = () => {
 	} = useFilterContext();
 
 	const categories = getUniqueValues(all_products, 'category');
-	const companies = getUniqueValues(all_products, 'company');
-	const colors = getUniqueValues(all_products, 'colors');
+	const brands = getUniqueValues(all_products, 'brand');
+	//const sizes = getUniqueValues(all_products, 'sizes');
+	const sizes = ['all','XS', 'S', 'M', 'L', 'XL']
 
 	return (
 		<Wrapper>
@@ -66,39 +67,60 @@ const Filters = () => {
 					</div>
 					{/* end of categories */}
 
-					{/* companies */}
+					{/* brands */}
 					<div className='form-control'>
-						<h5>company</h5>
+						<h5>brand</h5>
 						{/* important that name matches filter state value as it's important for dynamically setting up update filters*/}
 						<select
-							name='company'
-							value={company}
+							name='brand'
+							value={brand}
 							onChange={updateFilters}
-							className='company'>
-							{companies.map((c, index) => {
+							className='brand'>
+							{brands.map((b, index) => {
 								return (
-									<option key={index} value={c}>
-										{c}
+									<option key={index} value={b}>
+										{b}
 									</option>
 								);
 							})}
 						</select>
 					</div>
-					{/* end of companies */}
-					{/* colors */}
+					{/* end of brands */}
+
+					{/* sizes */}
 					<div className='form-control'>
-						<h5>colors</h5>
-						<div className='colors'>
-							{colors.map((c, index) => {
-								if (c === 'all') {
+						<h5>size</h5>
+						{/* important that name matches filter state value as it's important for dynamically setting up update filters*/}
+						<select
+							name='size'
+							value={size}
+							onChange={updateFilters}
+							className='size'>
+							{sizes.map((s, index) => {
+								return (
+									<option key={index} value={s}>
+										{s}
+									</option>
+								);
+							})}
+						</select>
+					</div>
+					{/* end of sizes */}
+
+					{/* sizes 
+					<div className='form-control'>
+						<h5>size</h5>
+						<div className='sizes'>
+							{sizes.map((s, index) => {
+								if (s === 'all') {
 									return (
 										<button
 											key={index}
-											name='color'
+											name='size'
 											onClick={updateFilters}
-											data-color='all'
+											data-size='all'
 											className={`${
-												color === 'all' ? 'all-btn active' : 'all-btn'
+												size === 'all' ? 'all-btn active' : 'all-btn'
 											}`}>
 											all
 										</button>
@@ -108,13 +130,13 @@ const Filters = () => {
 									<button
 										key={index}
 										name='color'
-										//dynamically overrides default background color:
+										dynamically overrides default background color:
 										style={{ background: c }}
-										/* if color (state value) matches the individual color, set style as active*/
+										 if color (state value) matches the individual color, set style as active
 										className={`${
 											color === c ? 'color-btn active' : 'color-btn'
 										}`}
-										//add hex value to data (filter-context). With buttons we cannot use values so we use data attributes, which comes with html:
+										add hex value to data (filter-context). With buttons we cannot use values so we use data attributes, which comes with html:
 										data-color={c}
 										onClick={updateFilters}>
 										{color === c ? <FaCheck /> : null}
@@ -123,7 +145,7 @@ const Filters = () => {
 							})}
 						</div>
 					</div>
-					{/* end of colors */}
+				 end of sizes */}
 					{/* price */}
 					<div className='form-control'>
 						<h5>price</h5>
@@ -141,7 +163,7 @@ const Filters = () => {
 					{/* shipping */}
 
 					<div className='form-control shipping'>
-						<label htmlFor='shipping'>free shipping</label>
+						<label htmlFor='shipping'>free delivery</label>
 						<input
 							type='checkbox'
 							name='shipping'
@@ -170,6 +192,7 @@ const Wrapper = styled.section`
 		}
 	}
 	.search-input {
+		width: 90%;
 		padding: 0.5rem;
 		background: var(--clr-grey-10);
 		border-radius: var(--radius);

@@ -8,8 +8,9 @@ import AmountButtons from './AmountButtons';
 const AddToCart = ({ product }) => {
 	const { addToCart } = useCartContext();
 	const { id, stock } = product;
-	//state for color buttons:
-	//const [mainColor, setMainColor] = useState(colors[0]);
+	//state for sizes buttons:
+	const sizes = ['XS', 'S', 'M', 'L', 'XL']
+	const [mainSize, setMainSize] = useState(sizes[0]);
 	//state for amount buttons:
 	const [amount, setAmount] = useState(1);
 
@@ -37,22 +38,22 @@ const AddToCart = ({ product }) => {
 	return (
 		<Wrapper>
 			<div className='colors'>
-				<span> colors: </span>
+				<span> size: </span>
 				<div>
 					{/* for each color return a button, background color added dynamically, if the color is the same as the main color, it gets the class of active (half opacity in css) and gets a checkmark  */}
-					{/* {colors.map((color, index) => {
+					 {sizes.map((size, index) => {
 						return (
 							<button
 								key={index}
-								style={{ background: color }}
+								//style={{ background: color }}
 								className={`${
-									mainColor === color ? 'color-btn active' : 'color-btn'
+									mainSize === size ? 'color-btn active' : 'color-btn'
 								}`}
-								onClick={() => setMainColor(color)}>
-								{mainColor === color ? <FaCheck /> : null}
+								onClick={() => setMainSize(size)}> {size}
+								
 							</button>
 						);
-					})} */}
+					})} 
 				</div>
 			</div>
 			<div className='btn-container'>
@@ -89,10 +90,11 @@ const Wrapper = styled.section`
 	}
 	.color-btn {
 		display: inline-block;
-		width: 1.5rem;
-		height: 1.5rem;
+		width: 1.8rem;
+		height: 1.8rem;
 		border-radius: 50%;
 		background: #222;
+		color: white;
 		margin-right: 0.5rem;
 		border: none;
 		cursor: pointer;

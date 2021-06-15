@@ -19,9 +19,9 @@ const initialState = {
 	sort: 'price-lowest',
 	filters: {
 		text: '',
-		company: 'all',
+		brand: 'all',
 		category: 'all',
-		color: 'all',
+		size: 'all',
 		min_price: 0,
 		max_price: 0,
 		price: 0,
@@ -68,9 +68,9 @@ export const FilterProvider = ({ children }) => {
 			value = e.target.textContent;
 		}
 		//we also can't access value of hex colors using target.value therefore we use target.dataset:
-		if (name === 'color') {
-			value = e.target.dataset.color;
-		}
+		// if (name === 'size') {
+		// 	value = e.size.dataset.color;
+		// }
 		//when getting value from range input it turns into a string so need to turn it into number:
 		if (name === 'price') {
 			value = Number(value);
