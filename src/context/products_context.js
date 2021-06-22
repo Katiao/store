@@ -1,27 +1,27 @@
-import axios from 'axios';
-import React, { useContext, useEffect, useReducer } from 'react';
-import reducer from '../reducers/products_reducer';
-import { products_url as url } from '../utils/constants';
+import axios from "axios";
+import React, { useContext, useEffect, useReducer } from "react";
+import reducer from "../reducers/products_reducer";
+import { products_url as url } from "../utils/constants";
 import {
-	SIDEBAR_OPEN,
-	SIDEBAR_CLOSE,
-	GET_PRODUCTS_BEGIN,
-	GET_PRODUCTS_SUCCESS,
-	GET_PRODUCTS_ERROR,
-	GET_SINGLE_PRODUCT_BEGIN,
-	GET_SINGLE_PRODUCT_SUCCESS,
-	GET_SINGLE_PRODUCT_ERROR,
-} from '../actions';
+  SIDEBAR_OPEN,
+  SIDEBAR_CLOSE,
+  GET_PRODUCTS_BEGIN,
+  GET_PRODUCTS_SUCCESS,
+  GET_PRODUCTS_ERROR,
+  GET_SINGLE_PRODUCT_BEGIN,
+  GET_SINGLE_PRODUCT_SUCCESS,
+  GET_SINGLE_PRODUCT_ERROR,
+} from "../actions";
 
 const initialState = {
-	isSidebarOpen: false,
-	products_loading: false,
-	products_error: false,
-	products: [],
-	featured_products: [],
-	single_product_loading: false,
-	single_product_error: false,
-	single_product: {},
+  isSidebarOpen: false,
+  products_loading: false,
+  products_error: false,
+  products: [],
+  featured_products: [],
+  single_product_loading: false,
+  single_product_error: false,
+  single_product: {},
 };
 
 const ProductsContext = React.createContext();
@@ -31,53 +31,54 @@ const ProductsContext = React.createContext();
 //reducer that's passed in to useReducer comes from reducer file
 
 export const ProductsProvider = ({ children }) => {
-	const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
-	const openSidebar = () => {
-		dispatch({ type: SIDEBAR_OPEN });
-	};
+  const openSidebar = () => {
+    dispatch({ type: SIDEBAR_OPEN });
+  };
 
-	const closeSidebar = () => {
-		dispatch({ type: SIDEBAR_CLOSE });
-	};
+  const closeSidebar = () => {
+    dispatch({ type: SIDEBAR_CLOSE });
+  };
 
-	//fetching products from API. Setting up useEffect in context, because I can fetch it once and can distribute it to home page and products page.
-	const fetchProducts = async (url) => {
-		//this dispatch will set up the loading in products reducer. Handles loading, sucess and error.
-		dispatch({ type: GET_PRODUCTS_BEGIN });
-		try {
-			const response = await axios.get(url);
-			const products = response.data;
-			dispatch({ type: GET_PRODUCTS_SUCCESS, payload: products });
-		} catch (error) {
-			dispatch({ type: GET_PRODUCTS_ERROR });
-		}
-	};
+  //fetching products from API. Setting up useEffect in context, because I can fetch it once and can distribute it to home page and products page.
+  const fetchProducts = async (url) => {
+    //this dispatch will set up the loading in products reducer. Handles loading, sucess and error.
+    dispatch({ type: GET_PRODUCTS_BEGIN });
+    try {
+      const response = await axios.get(url);
+      const products = response.data;
+      dispatch({ type: GET_PRODUCTS_SUCCESS, payload: products });
+    } catch (error) {
+      dispatch({ type: GET_PRODUCTS_ERROR });
+    }
+  };
 
-	const fetchSingleProduct = async (url) => {
-		dispatch({ type: GET_SINGLE_PRODUCT_BEGIN });
-		try {
-			const response = await axios.get(url);
-			console.log(response.data)
-			const singleProduct = response.data;
-			dispatch({ type: GET_SINGLE_PRODUCT_SUCCESS, payload: singleProduct });
-		} catch (error) {
-			dispatch({ type: GET_SINGLE_PRODUCT_ERROR });
-		}
-	};
-	//fetchsingleProduct will be passed in the useEffect of the single product page as we load single products there.
-	useEffect(() => {
-		fetchProducts(url);
-	}, []);
+  const fetchSingleProduct = async (url) => {
+    dispatch({ type: GET_SINGLE_PRODUCT_BEGIN });
+    try {
+      const response = await axios.get(url);
+      console.log(response.data, "single product data PART2");
+      const singleProduct = response.data;
+      dispatch({ type: GET_SINGLE_PRODUCT_SUCCESS, payload: singleProduct });
+    } catch (error) {
+      dispatch({ type: GET_SINGLE_PRODUCT_ERROR });
+    }
+  };
+  //fetchsingleProduct will be passed in the useEffect of the single product page as we load single products there.
+  useEffect(() => {
+    fetchProducts(url);
+  }, []);
 
-	return (
-		<ProductsContext.Provider
-			value={{ ...state, openSidebar, closeSidebar, fetchSingleProduct }}>
-			{children}
-		</ProductsContext.Provider>
-	);
+  return (
+    <ProductsContext.Provider
+      value={{ ...state, openSidebar, closeSidebar, fetchSingleProduct }}
+    >
+      {children}
+    </ProductsContext.Provider>
+  );
 };
 // This is my hook which ensures that I can use the context other components:
 export const useProductsContext = () => {
-	return useContext(ProductsContext);
+  return useContext(ProductsContext);
 };
