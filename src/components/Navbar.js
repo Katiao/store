@@ -3,6 +3,7 @@ import styled from "styled-components";
 import logo from "../assets/logo.png";
 import { FaBars } from "react-icons/fa";
 import { Link } from "react-router-dom";
+//added links in separate file as we'll be using them in the sidebar as well
 import { links } from "../utils/constants";
 import CartButtons from "./CartButtons";
 import { useProductsContext } from "../context/products_context";
