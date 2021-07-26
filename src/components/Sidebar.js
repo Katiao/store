@@ -20,7 +20,7 @@ const Sidebar = () => {
         <div className="sidebar-header">
           <img src={logo} className="logo" alt="comfy sloth" />
           <button className="close-btn" type="button" onClick={closeSidebar}>
-            <FaTimes />{" "}
+            <FaTimes />
           </button>
         </div>
 
@@ -103,13 +103,17 @@ const SidebarContainer = styled.div`
     height: 100%;
     background: var(--clr-white);
     transition: var(--transition);
+    //by default sidebar is hidden:
     transform: translate(-100%);
     z-index: -1;
   }
+  //sidebar displayed only if there is a class of show-sidebar:
   .show-sidebar {
     transform: translate(0);
     z-index: 999;
   }
+  //this centers the buttons in middle
+  ////class cart-btn-wrapper is used in the CartButtons Component
   .cart-btn-wrapper {
     margin: 2rem auto;
   }

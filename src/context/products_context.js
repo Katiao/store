@@ -29,6 +29,7 @@ const ProductsContext = React.createContext();
 //we also use use reducer here to update state. To change state we' always have to run the type of action through our dispatch.
 // you can only adapt the state if there is an action.
 //reducer that's passed in to useReducer comes from reducer file
+//This context is responsible for data coming from API + open and close sidebar functionality
 
 export const ProductsProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
