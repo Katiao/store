@@ -42,7 +42,6 @@ const products_reducer = (state, action) => {
     };
   }
   if (action.type === GET_SINGLE_PRODUCT_SUCCESS) {
-    console.log(action.payload, "data from reducer");
     return {
       ...state,
       single_product_loading: false,
