@@ -4,6 +4,7 @@ import styled from "styled-components";
 //since we have a main image we set up the useState / state value.
 //initially the images are undefined that's why we set up default params.
 //if images are undefined, we set it as an empty array with empty url param, to avoid error:
+//ES6 Default parameters
 const ProductImages = ({ images = [{ url: "" }] }) => {
   const [main, setMain] = useState(images[0]);
   return (
@@ -11,15 +12,16 @@ const ProductImages = ({ images = [{ url: "" }] }) => {
       <img src={main.url} alt="main" className="main" />
       <div className="gallery">
         {images.map((image, index) => {
+          const { url, filename } = image;
           return (
             <img
-              src={image.url}
-              alt={image.filename}
+              src={url}
+              alt={filename}
               key={index}
               //onclick changes the main image, based on index of particular image.
               onClick={() => setMain(images[index])}
               //if image url matches url that is coming from the main, add active class:
-              className={`${image.url === main.url ? "active" : null}`}
+              className={`${url === main.url ? "active" : null}`}
             />
           );
         })}

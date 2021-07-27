@@ -8,7 +8,6 @@ const AddToCart = ({ product }) => {
   const { addToCart } = useCartContext();
   const { id } = product;
   const { stock, sizes } = product.fields;
-  console.log(product);
   //state for sizes buttons:
   const [size, setSize] = useState(sizes[0]);
   //state for amount buttons:
@@ -37,20 +36,20 @@ const AddToCart = ({ product }) => {
 
   return (
     <Wrapper>
-      <div className="colors">
+      <div className="sizes">
         <span> size: </span>
         <div>
-          {/* for each color return a button, background color added dynamically, if the color is the same as the main color, it gets the class of active (half opacity in css) and gets a checkmark  */}
-          {sizes.map((s, index) => {
+          {/* for each size return a button */}
+          {sizes.map((singleSize, index) => {
             return (
               <button
                 key={index}
-                //style={{ background: color }}
-                className={`${size === s ? "color-btn active" : "color-btn"}`}
-                onClick={() => setSize(s)}
+                className={`${
+                  size === singleSize ? "size-btn active" : "size-btn"
+                }`}
+                onClick={() => setSize(singleSize)}
               >
-                {" "}
-                {s}
+                {singleSize}
               </button>
             );
           })}
@@ -76,7 +75,7 @@ const AddToCart = ({ product }) => {
 
 const Wrapper = styled.section`
   margin-top: 2rem;
-  .colors {
+  .sizes {
     display: grid;
     grid-template-columns: 125px 1fr;
     align-items: center;
@@ -89,7 +88,7 @@ const Wrapper = styled.section`
       display: flex;
     }
   }
-  .color-btn {
+  .size-btn {
     display: inline-block;
     width: 2.5rem;
     height: 2.5rem;
