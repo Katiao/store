@@ -152,6 +152,7 @@ const Wrapper = styled.section`
       margin-bottom: 0.5rem;
     }
   }
+
   .search-input {
     width: 90%;
     padding: 0.5rem;

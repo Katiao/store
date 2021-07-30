@@ -14,7 +14,7 @@ import {
 
 const filter_reducer = (state, action) => {
   if (action.type === LOAD_PRODUCTS) {
-    //mapping through each product in payload and get all prices. Cannot pass array in max method so use spread operator
+    //mapping through each product in payload and get all prices.
     let maxPrice = action.payload.map((p) => p.price);
     //in max method we cannot pass in array so we use spread operator:
     maxPrice = Math.max(...maxPrice);
@@ -85,20 +85,20 @@ const filter_reducer = (state, action) => {
       );
     }
 
-    //filtering company
+    //filtering brand
     if (brand !== "all") {
       tempProducts = tempProducts.filter(
-        //for that product, check if product's company matches state company.
+        //for that product, check if product's brand matches brand in state.
         (product) => product.brand === brand
       );
     }
 
-    //filtering colors
-    //gotcha with colors as it's an array.
+    //filtering sizes
+    //gotcha with sizes as it's an array.
     if (size !== "all") {
       tempProducts = tempProducts.filter((product) => {
-        //product is an array and product.color is also an array
-        //I run find method on colors array, check if color matches color coming from the state.
+        //product is an array and product.size is also an array therefore run one more calback function inside filter
+        //I run find method on sizes array, check if size matches size coming from the state.
         return product.sizes.find((s) => s === size);
       });
     }
