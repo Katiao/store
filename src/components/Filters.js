@@ -187,19 +187,6 @@ const Wrapper = styled.section`
     padding: 0.25rem;
   }
 
-  .all-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 0.5rem;
-    opacity: 0.5;
-  }
-  .active {
-    opacity: 1;
-  }
-  .all-btn .active {
-    text-decoration: underline;
-  }
   .price {
     margin-bottom: 0.25rem;
   }
