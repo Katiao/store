@@ -55,8 +55,8 @@ const Wrapper = styled.article`
   margin-bottom: 3rem;
   align-items: center;
   .title {
-    grid-template-rows: 75px;
     display: grid;
+    grid-template-rows: 75px;
     grid-template-columns: 75px 125px;
     align-items: center;
     text-align: left;
@@ -84,20 +84,9 @@ const Wrapper = styled.article`
   .price-small {
     color: var(--clr-primary-5);
   }
-  .amount-btns {
-    width: 75px;
-    button {
-      width: 1rem;
-      height: 0.5rem;
-      font-size: 0.75rem;
-    }
-    h2 {
-      font-size: 1rem;
-    }
-  }
+
   .remove-btn {
     color: var(--clr-white);
-    background: transparent;
     border: transparent;
     letter-spacing: var(--spacing);
     background: var(--clr-red-dark);
@@ -146,17 +135,6 @@ const Wrapper = styled.article`
       align-items: center;
       gap: 1rem;
       text-align: left;
-    }
-    .amount-btns {
-      width: 100px;
-      button {
-        width: 1.5rem;
-        height: 1rem;
-        font-size: 1rem;
-      }
-      h2 {
-        font-size: 1.5rem;
-      }
     }
   }
 `;
