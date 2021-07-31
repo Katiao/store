@@ -12,6 +12,7 @@ import {
 const getLocalStorage = () => {
   let cart = localStorage.getItem("cart");
   if (cart) {
+    //we stored it as a string so now we want to parse it back:
     return JSON.parse(localStorage.getItem("cart"));
   } else {
     return [];
@@ -21,6 +22,7 @@ const getLocalStorage = () => {
 const initialState = {
   cart: getLocalStorage(),
   total_items: 0,
+  //this is total dollar amount:
   total_amount: 0,
   shipping_fee: 550,
 };
@@ -51,9 +53,10 @@ export const CartProvider = ({ children }) => {
   };
 
   //local storage: useEffect invoked everytime there is a change in the cart. Can only store strings in local storage.
-  //added to this useEffect: everytime cart changes, update totals in mulziple places
+  //added to this useEffect: everytime cart changes, update totals in multiple places
   useEffect(() => {
     dispatch({ type: COUNT_CART_TOTALS });
+    //setting key and value in local storage:
     localStorage.setItem("cart", JSON.stringify(state.cart));
   }, [state.cart]);
 

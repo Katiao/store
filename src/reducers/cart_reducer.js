@@ -9,7 +9,8 @@ import {
 const cart_reducer = (state, action) => {
   if (action.type === ADD_TO_CART) {
     const { id, size, amount, product } = action.payload;
-    // check if item is already in the cart. When setting up ID in cart combine size & ID
+    // check if item is already in the cart. When setting up ID in cart we'll combine size & ID so we look for those here.
+    //you might have same product with different sizes
     const tempItem = state.cart.find((i) => i.id === id + size);
     //if item is already in the cart, I just want to increase that amount.
     if (tempItem) {
